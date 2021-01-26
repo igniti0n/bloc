@@ -1,5 +1,6 @@
-import 'package:blocPractice/blocs/cubit/countercubit_cubit.dart';
 import 'package:flutter/material.dart';
+
+import './blocs/cubits/counter_cubit.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +48,7 @@ class _CounterScreenState extends State<CounterScreen> {
               //   //   return false;
               //   // },
               // ),
-              BlocConsumer<CountercubitCubit, CounterState>(
+              BlocConsumer<CounterCubit, CounterState>(
             listener: (context, state) {
               // TODO: implement listener
               Scaffold.of(context).showSnackBar(
@@ -64,11 +65,11 @@ class _CounterScreenState extends State<CounterScreen> {
                   : "4 JEBOTE ${state.value}");
             },
             buildWhen: (a, b) {
-              if (a.value < b.value) return true;
-              return false;
+              // if (a.value < b.value) return true;
+              return true;
             },
             listenWhen: (newState, oldState) {
-              if (oldState.value != 4) return true;
+              if (newState.value > oldState.value) return true;
               return false;
             },
           ),
@@ -79,12 +80,12 @@ class _CounterScreenState extends State<CounterScreen> {
         children: [
           FloatingActionButton(
             onPressed: () {
-              BlocProvider.of<CountercubitCubit>(context).increment();
+              BlocProvider.of<CounterCubit>(context).increment();
             },
           ),
           FloatingActionButton(
             onPressed: () {
-              BlocProvider.of<CountercubitCubit>(context).dicrement();
+              BlocProvider.of<CounterCubit>(context).dicrement();
             },
           ),
         ],
