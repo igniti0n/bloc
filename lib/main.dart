@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'screen.dart';
-import './blocs/cubits/counter_cubit.dart';
+import './presentation/routes/route_generator.dart';
+import './logic/cubits/counter_cubit.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,7 +10,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  RouteGenerator _routeGenerator = new RouteGenerator();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CounterCubit>(
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
           // application has a blue toolbar. Then, without qui,
 
           // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (pre,
+          // "h,
+          //ot reload" (pre,
           // )ss "r" in the console where you ran "flutter run",
           // or simply save your changes to "hot reload" in a Flutter IDE).
           // Notice that the counter didn't reset back to zero; the application
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
           // closer together (more dense) than on mobile platforms.
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: CounterScreen(),
+        onGenerateRoute: _routeGenerator.onGenerateRoute,
       ),
     );
   }
